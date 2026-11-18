@@ -1,0 +1,26 @@
+{
+  "name": "kambac-livestock-module",
+  "version": "1.0.0",
+  "description": "KAMBAC Livestock Management Module - Independent Repository",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "migrate": "node database/migrate.js",
+    "seed": "node database/seed.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "mysql2": "^3.9.2",
+    "sequelize": "^6.37.3",
+    "bcrypt": "^5.1.0",
+    "express-session": "^1.17.3",
+    "connect-flash": "^0.1.1",
+    "hbs": "^4.2.0",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Runtime & Logs
+*.log
+storage/logs/*
+!storage/logs/.gitkeep
+storage/uploads/*
+!storage/uploads/.gitkeep
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Database backups & dumps
+*.sql
+*.sqlite
+
+# Testing artifacts & cookies
+cookies.txt
+coverage/

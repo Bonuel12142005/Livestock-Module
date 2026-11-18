@@ -1,0 +1,135 @@
+<!-- Livestock Management Top Navigation Bar -->
+<header class="bg-forest-900 border-b border-forest-950 text-white shadow-xl sticky top-0 z-40 transition-colors duration-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      
+      <!-- 1. Brand Logo & Name (Left) -->
+      <div class="flex items-center space-x-3 flex-shrink-0">
+        <a href="/livestock" class="flex items-center space-x-3 group">
+          <div class="w-10 h-10 rounded-xl bg-forest-700/80 group-hover:bg-forest-600 border border-forest-600 flex items-center justify-center shadow-md transition-all">
+            <i data-lucide="rabbit" class="w-6 h-6 text-white"></i>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-xl font-black tracking-tight text-white flex items-center gap-1.5 leading-tight">
+              KAMBAC <span class="text-emerald-300 font-semibold text-[11px] tracking-wide uppercase px-2 py-0.5 bg-forest-950/70 rounded-full border border-forest-700/60">Livestock Module</span>
+            </span>
+            <p class="text-[11px] text-emerald-200/80 font-medium hidden sm:block">Herd Inventory & Health Monitoring</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- 2. Desktop Navigation Menu Items (Center/Main) -->
+      <nav class="hidden lg:flex items-center space-x-1 xl:space-x-1.5">
+        
+        <!-- 1. Active Livestock Herd -->
+        <a href="/livestock" class="px-3 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 {{#if (eq activeNav 'overview')}}bg-forest-700 text-white shadow-sm ring-1 ring-forest-500/30{{else}}text-forest-100 hover:text-white hover:bg-forest-800/80{{/if}}">
+          <i data-lucide="layout-dashboard" class="w-4 h-4 {{#if (eq activeNav 'overview')}}text-emerald-300{{else}}text-forest-200{{/if}}"></i>
+          <span>Livestock Herd</span>
+        </a>
+
+        <!-- 2. Archived Livestock -->
+        <a href="/livestock/archived" class="px-3 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 {{#if (eq activeNav 'archived')}}bg-forest-700 text-white shadow-sm ring-1 ring-forest-500/30{{else}}text-forest-100 hover:text-white hover:bg-forest-800/80{{/if}}">
+          <i data-lucide="archive" class="w-4 h-4 {{#if (eq activeNav 'archived')}}text-emerald-300{{else}}text-forest-200{{/if}}"></i>
+          <span>Archived Records</span>
+        </a>
+
+      </nav>
+
+      <!-- 3. Right-Side Navigation Controls -->
+      <div class="flex items-center space-x-2 sm:space-x-3">
+        
+        <!-- Theme Toggle Button -->
+        <button id="themeToggleBtn" type="button" title="Toggle Light / Dark Mode" class="p-2 rounded-xl text-emerald-200 hover:text-white hover:bg-forest-800/90 transition-all border border-forest-700/50 shadow-sm focus:outline-none">
+          <i id="themeIconSun" data-lucide="sun" class="w-5 h-5 hidden"></i>
+          <i id="themeIconMoon" data-lucide="moon" class="w-5 h-5"></i>
+        </button>
+
+        <!-- Notification Button & Dropdown Panel -->
+        <div class="relative">
+          <button id="notifDropdownBtn" type="button" title="Notifications" class="relative p-2 rounded-xl text-emerald-200 hover:text-white hover:bg-forest-800/90 transition-all border border-forest-700/50 shadow-sm focus:outline-none">
+            <i data-lucide="bell" class="w-5 h-5"></i>
+            <span class="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-emerald-400 rounded-full ring-2 ring-forest-900 animate-pulse"></span>
+          </button>
+
+          <!-- Notification Dropdown Menu -->
+          <div id="notifDropdownMenu" class="hidden absolute right-0 mt-2 w-80 sm:w-88 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-gray-100 dark:border-slate-700 py-3 z-50 text-slate-800 dark:text-slate-100">
+            <div class="px-4 py-2 border-b border-gray-100 dark:border-slate-700 flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-forest-700 dark:text-emerald-400">Livestock Alerts</span>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 font-semibold">Active</span>
+            </div>
+            <div class="divide-y divide-gray-100 dark:divide-slate-700/50 max-h-72 overflow-y-auto">
+              <div class="px-4 py-3 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors cursor-pointer flex gap-3">
+                <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0">
+                  <i data-lucide="rabbit" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <p class="text-xs font-semibold text-gray-900 dark:text-gray-100">Livestock Herd Synchronized</p>
+                  <p class="text-[11px] text-gray-500 dark:text-gray-400">Health logs and weights recorded in MySQL.</p>
+                  <span class="text-[10px] text-emerald-600 dark:text-emerald-400 font-medium">Just now</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Administrator Profile Avatar & Dropdown -->
+        <div class="relative">
+          <button id="profileDropdownBtn" type="button" class="flex items-center space-x-2 p-1 pl-2 pr-3 rounded-full hover:bg-forest-800/90 border border-transparent hover:border-forest-700/50 transition-all focus:outline-none">
+            <div class="w-8 h-8 rounded-full bg-emerald-500 text-forest-950 font-black text-xs flex items-center justify-center shadow-inner">
+              {{#if currentUser.initials}}{{ currentUser.initials }}{{else}}AD{{/if}}
+            </div>
+            <div class="hidden md:flex flex-col text-left leading-tight">
+              <span class="text-xs font-semibold text-white truncate max-w-[110px]">
+                {{#if currentUser.name}}{{ currentUser.name }}{{else}}Administrator{{/if}}
+              </span>
+              <span class="text-[10px] text-emerald-300 font-medium capitalize">
+                {{#if currentUser.role}}{{ currentUser.role }}{{else}}Staff{{/if}}
+              </span>
+            </div>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-emerald-300 ml-1"></i>
+          </button>
+
+          <!-- Profile Dropdown Menu -->
+          <div id="profileDropdownMenu" class="hidden absolute right-0 mt-2 w-56 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-gray-100 dark:border-slate-700 py-2 z-50 text-slate-700 dark:text-slate-200">
+            <div class="px-4 py-2.5 border-b border-gray-100 dark:border-slate-700">
+              <p class="text-xs font-bold text-gray-900 dark:text-white truncate">{{ currentUser.name }}</p>
+              <p class="text-[11px] text-gray-500 dark:text-gray-400 truncate">{{ currentUser.email }}</p>
+            </div>
+            <a href="/profile" class="flex items-center gap-2.5 px-4 py-2 text-xs font-medium hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
+              <i data-lucide="user" class="w-4 h-4"></i>
+              <span>My Profile</span>
+            </a>
+            <a href="/settings" class="flex items-center gap-2.5 px-4 py-2 text-xs font-medium hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
+              <i data-lucide="settings" class="w-4 h-4"></i>
+              <span>Account Settings</span>
+            </a>
+            <div class="border-t border-gray-100 dark:border-slate-700 my-1"></div>
+            <a href="/logout" class="flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-red-600 hover:bg-red-50 dark:hover:bg-red-950/40 dark:text-red-400 transition-colors">
+              <i data-lucide="log-out" class="w-4 h-4"></i>
+              <span>Logout</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobileMenuBtn" type="button" class="lg:hidden p-2 rounded-xl text-emerald-200 hover:text-white hover:bg-forest-800/90 transition-all border border-forest-700/50 focus:outline-none" aria-label="Toggle Navigation">
+          <i id="mobileMenuOpenIcon" data-lucide="menu" class="w-5 h-5"></i>
+          <i id="mobileMenuCloseIcon" data-lucide="x" class="w-5 h-5 hidden"></i>
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Responsive Dropdown Drawer -->
+  <div id="mobileMenuDrawer" class="hidden lg:hidden bg-forest-950/95 border-b border-forest-800 px-4 pt-3 pb-5 space-y-1 shadow-2xl backdrop-blur-md">
+    <a href="/livestock" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium {{#if (eq activeNav 'overview')}}bg-forest-700 text-white{{else}}text-forest-100 hover:bg-forest-800/80{{/if}}">
+      <i data-lucide="layout-dashboard" class="w-4 h-4 text-emerald-300"></i>
+      <span>Livestock Herd</span>
+    </a>
+    <a href="/livestock/archived" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium {{#if (eq activeNav 'archived')}}bg-forest-700 text-white{{else}}text-forest-100 hover:bg-forest-800/80{{/if}}">
+      <i data-lucide="archive" class="w-4 h-4 text-emerald-300"></i>
+      <span>Archived Records</span>
+    </a>
+  </div>
+</header>
